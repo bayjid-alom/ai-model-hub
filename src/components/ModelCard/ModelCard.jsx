@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const ModelCard = ({ model, carts, setCarts }) => {
     // model >> object received from Models.jsx
 
-
     const [isSubscribed, setIsSubscribed] = useState(false)
 
+
     const handleSubscription = (model) => {
+        const existingCartItem = carts.find(c => c.id === model.id)
+        if (existingCartItem) {
+            toast.info("This AI model is already in your collection!");
+            return;
+        }
+
         setIsSubscribed(true)
         setCarts([...carts, model])
+        toast.success(`${model.title} added to your collection!`);
     }
 
 

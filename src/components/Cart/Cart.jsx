@@ -1,10 +1,22 @@
 import { Delete, DeleteIcon, Trash } from 'lucide-react';
 import React from 'react';
+import { toast } from 'react-toastify';
 
 const Cart = ({ carts, setCarts }) => {
 
     const totalPrice = carts.reduce((sum, item) => sum + item.price, 0)
-    console.log(">>>", totalPrice);
+
+
+    const handleRemoveCartItem = (item) => {
+        const filteredCarts = carts.filter(c => c.id !== item.id)
+        setCarts(filteredCarts)
+        toast.success(`${item.title} removed from your cart!`);
+    }
+
+    const handleProceedToCheckout = () => {
+        setCarts([])
+        toast.success("Checkout initiated successfully!", { theme: 'dark' });
+    }
 
 
     return (
@@ -132,6 +144,7 @@ const Cart = ({ carts, setCarts }) => {
                             </div>
 
                             <button
+                                onClick={() => handleRemoveCartItem(item)}
                                 className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-red-100 bg-red-50 text-red-500 transition-colors duration-200 hover:border-red-500 hover:bg-red-500 hover:text-white"
                                 aria-label={`Remove ${item.title} from cart`}
                             >
@@ -143,6 +156,9 @@ const Cart = ({ carts, setCarts }) => {
                     </div>
                 ))}
             </div>
+
+
+
 
 
 
@@ -169,7 +185,9 @@ const Cart = ({ carts, setCarts }) => {
 
 
                     {/* Checkout Button Card */}
-                    <div className="rounded-2xl border border-[#E8DFD1] bg-white shadow-sm ">
+                    <div
+                        onClick={() => handleProceedToCheckout()}
+                        className="rounded-2xl border border-[#E8DFD1] bg-white shadow-sm ">
 
                         <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 px-6 py-3 md:py-5 text-base font-bold text-white shadow-md shadow-red-500/20 transition-all duration-300 hover:from-red-600 hover:to-orange-600 hover:shadow-lg hover:shadow-red-500/30 sm:text-lg">
                             Proceed to Checkout!
