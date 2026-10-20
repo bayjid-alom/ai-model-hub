@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 
-const ModelCard = ({ model }) => {
+const ModelCard = ({ model, carts, setCarts }) => {
     // model >> object received from Models.jsx
 
+
     const [isSubscribed, setIsSubscribed] = useState(false)
+
+    const handleSubscription = (model) => {
+        setIsSubscribed(true)
+        setCarts([...carts, model])
+    }
+
 
     return (
         <div
@@ -61,7 +68,7 @@ const ModelCard = ({ model }) => {
 
                 {/* Subscribe Button */}
                 <button
-                    onClick={() => setIsSubscribed(true)}
+                    onClick={() => handleSubscription(model)}
                     className="mt-4 w-full rounded-xl bg-gradient-to-r from-pink-500 to-red-500 px-4 py-3 text-sm font-semibold text-white shadow-md shadow-red-500/15 transition-all duration-300 hover:from-pink-600 hover:to-red-600 hover:shadow-lg hover:shadow-red-500/25 active:scale-[0.98]">
                     {isSubscribed ? "Subscribed" : "Subscribe Now"}
                 </button>

@@ -21,6 +21,7 @@ function App() {
   // console.log(modelPromise);
 
   const [activeTab, setActiveTab] = useState("models")
+  const [carts, setCarts] = useState([])
 
 
 
@@ -28,6 +29,7 @@ function App() {
     <>
       <Navbar />
       <Banner />
+
 
 
       {/* Tab buttons (Models & Cart) */}
@@ -52,12 +54,10 @@ function App() {
               : "bg-white text-black"
             }`}
         >
-          Cart (0)
+          Cart ({carts.length})
         </button>
 
       </div>
-
-
 
 
 
@@ -66,10 +66,19 @@ function App() {
       </div>}
       >
 
-        {activeTab === "models" && <Models modelPromise={modelPromise}></Models>}
-        {activeTab === "cart" && <Cart></Cart>}
+        {activeTab === "models" && <Models
+          carts={carts}
+          setCarts={setCarts}
+          modelPromise={modelPromise}></Models>}
+
+        {activeTab === "cart" && <Cart
+          carts={carts}
+          setCarts={setCarts}></Cart>}
 
       </Suspense>
+
+
+
 
 
 

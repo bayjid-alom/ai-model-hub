@@ -101,7 +101,7 @@ const Footer = () => {
                     </p>
 
                     <p className="text-zinc-500">
-                        Built for the future of AI.
+                        Developed by <span className=' inline-block font-semibold transition-colors duration-200 hover:text-red-400'>Bayjid Alom</span>
                     </p>
                 </div>
             </div>
